@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quora_clone/AppBar.dart';
+import 'package:quora_clone/Myposts.dart';
 import 'package:quora_clone/NewQuestion.dart';
 import 'package:quora_clone/Profile.dart';
 import 'package:quora_clone/Signin.dart';
@@ -28,7 +29,8 @@ class MyApp extends StatelessWidget {
                 "/newquestion" : (context) => NewQuestion(),
                 "/profile" : (context) => Profile(),
                 "/" : (context) => Signin(),
-                "/signup" : (context) => Signup()
+                "/signup" : (context) => Signup(),
+                "/myposts" : (context) => Myposts()
               },
       initialRoute: "/",
       // home: Scaffold(

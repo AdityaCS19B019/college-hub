@@ -32,7 +32,7 @@ class _DoubtExpandedState extends State<DoubtExpanded> {
   Future<void> get_access(String accessed_role)async{
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String user_role = prefs.getString('role') ?? "";
-    if(accessed_role == 'all' || user_role == 'teacher')
+    if(accessed_role == 'teacher' || user_role == 'student')
     {
       setState(() {
         has_access = true;
@@ -58,7 +58,9 @@ class _DoubtExpandedState extends State<DoubtExpanded> {
     // final fieldtext = TextEditingController();
     // print(args);
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        backgroundColor: Color.fromARGB(255, 197, 131, 207),
+      ),
       drawer: Navbar(),
       body: Container(
           padding: EdgeInsets.fromLTRB(MediaQuery.of(context).size.width*0.02, MediaQuery.of(context).size.height*0.01, MediaQuery.of(context).size.width*0.02, MediaQuery.of(context).size.height*0.01),

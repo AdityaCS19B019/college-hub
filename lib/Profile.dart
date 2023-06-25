@@ -42,7 +42,7 @@ class _ProfileState extends State<Profile> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(209, 185, 5, 240),
+        backgroundColor: Color.fromARGB(255, 197, 131, 207),
         leading: Builder(
           builder: (BuildContext context) {
             return IconButton(

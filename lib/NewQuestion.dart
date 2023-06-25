@@ -21,6 +21,7 @@ class _NewQuestionState extends State<NewQuestion> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Color.fromARGB(255, 197, 131, 207),
         leading: Builder(
           builder: (BuildContext context) {
             return IconButton(

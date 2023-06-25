@@ -58,14 +58,16 @@ Future<List<Comment>> get_comments(String postid)async{
 }
 
 class _CommentState extends State<Comment> {
-  int noofupvotes = 24;
-  int noofdownvotes = 2;
   @override
   Comments_class c;
+  int noofupvotes = 0;
+  int noofdownvotes = 0;
   _CommentState({required this.c});
-  // void initState(){
-  //   get_comments(postid);
-  // }
+  void initState(){
+    // get_comments(postid);
+  noofupvotes = c.upvotes;
+  noofdownvotes = c.downvotes;
+  }
 
   Widget build(BuildContext context) {
     return Container(
@@ -133,7 +135,7 @@ class _CommentState extends State<Comment> {
                       ),
                   ),
                   Text(
-                    c.upvotes.toString(),
+                    noofupvotes.toString(),
                     style: const TextStyle(
                             // fontFamily: "Opensans",
                             // fontWeight: FontWeight.bold,
@@ -155,7 +157,7 @@ class _CommentState extends State<Comment> {
                       ),
                   ),
                   Text(
-                    c.downvotes.toString(),
+                    noofdownvotes.toString(),
                     style: const TextStyle(
                             // fontFamily: "Opensans",
                             // fontWeight: FontWeight.bold,

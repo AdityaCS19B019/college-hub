@@ -93,7 +93,9 @@ class _SigninState extends State<Signin> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        backgroundColor: Color.fromARGB(255, 197, 131, 207),
+      ),
       body: Form(
         key: _form,
         child: Container(

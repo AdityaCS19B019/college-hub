@@ -5,15 +5,16 @@ import 'navbar.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/retry.dart';
 import 'dart:convert';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class Homepage extends StatefulWidget {
-  const Homepage({super.key});
+class Myposts extends StatefulWidget {
+  const Myposts({super.key});
 
   @override
-  State<Homepage> createState() => _HomepageState();
+  State<Myposts> createState() => _MypostsState();
 }
 
-class _HomepageState extends State<Homepage> {
+class _MypostsState extends State<Myposts> {
   
   bool is_error = false;
   String errormsg = "";
@@ -22,20 +23,32 @@ class _HomepageState extends State<Homepage> {
   List<Doubt> doubts_recieved = [];
 
   Future<List<Doubt>> getDoubts()async{
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    String username = prefs.getString('username') ?? "";
     final client = http.Client();
     try {
-        var response = await client.get(
-            Uri.https('college-hub-service.onrender.com', 'post/allposts'),
+        var response = await client.post(
+            Uri.https('college-hub-service.onrender.com', 'post/myposts'),
+            body: {
+              "postowner" : username
+            }
         );
+        print(response.body);
         Map res = jsonDecode(response.body);
         // print(res);
-        var posts = res['posts'];
-        print(posts[0]['_id']);
+        var posts = res['data'];
+        // print(posts[0]['_id']);
         List<Post> posts_recieved = [];
+        // print("data = " + posts.length.toString());
         for(int i = 0 ; i < posts.length ; i++)
         {
             Post newpost = new Post(postdesc: posts[i]['postdesc'], posteddate: posts[i]['posteddate'], postid: posts[i]['_id'], postowner: posts[i]['postowner'], mode: posts[i]['mode'], ownerprofile: posts[i]['ownerprofile']);
             posts_recieved.add(newpost);
+        }
+        if(posts.length == 0)
+        {
+          posts_recieved.add(new Post(postdesc: "You haven't posted anything", posteddate: 'Admin Post', postid: '', postowner: '', mode: '', ownerprofile: 'https://d1whtlypfis84e.cloudfront.net/guides/wp-content/uploads/2021/01/12055912/2000px-Desktop_computer_clipart_-_Yellow_theme.svg_-1024x740.png'));
+          print("dummy request added");
         }
         // print(data['username']);
         if(res['success'])
